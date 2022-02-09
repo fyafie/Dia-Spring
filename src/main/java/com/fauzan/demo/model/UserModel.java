@@ -1,4 +1,4 @@
-package com.fauzan.demo;
+package com.fauzan.demo.model;
 
 import javax.persistence.*;
 
