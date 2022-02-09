@@ -66,7 +66,27 @@ public class UserService {
     public List<UserModel> searchUser(String userName){
         return userRepository.searchUser(userName);
     }
+    //update with put
+    public UserModel updateUser(int userId, UserModel userModel){
+        Optional<UserModel> currentUserOpt = userRepository.findById(userId);
+        if (currentUserOpt.isEmpty()){
+            return null;
+        }
+        return userRepository.save(userModel);
+    }
+    //update with patch
+    public UserModel updateUserName(int userId, String userName){
+        Optional<UserModel> currentUserOpt =userRepository.
+                findById(userId);
 
+        if (currentUserOpt.isEmpty()){
+            return null;
+        }
+        UserModel currentUser =currentUserOpt.get();
+        currentUser.setUserName(userName);
+
+        return userRepository.save(currentUser);
+    }
     //delete user
     public boolean deleteUser(int userId){
         Optional<UserModel> currentUserOpt = userRepository.findById(userId);

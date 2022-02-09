@@ -66,6 +66,27 @@ public class UserController {
     public List<UserModel>searchUser(@RequestParam("userName")String userName){
         return userService.searchUser(userName);
     }
+    //update with put
+    @PutMapping("/user/{userId}")
+    public UserModel updateUser(@PathVariable("userId") int userId,
+                                @RequestBody UserModel userModel){
+        UserModel updatedUser =userService.updateUser(userId, userModel);
+        if(updatedUser != null){
+            return updatedUser;
+        }else{
+            return new UserModel();
+        }
+    }
+    @PatchMapping("/user/update")
+    public UserModel updateUserName(@RequestParam("userId") int userId,
+                                    @RequestParam("userName") String userName){
+        UserModel updateUser = userService.updateUserName(userId, userName);
+        if (updateUser != null){
+            return updateUser;
+        }else{
+            return new UserModel();
+        }
+    }
     //delete user
     @DeleteMapping("/user/{userId}")
     public boolean deleteUser(@PathVariable("userId") int userId){
